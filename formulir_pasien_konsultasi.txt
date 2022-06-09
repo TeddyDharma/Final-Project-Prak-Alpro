@@ -1,0 +1,15 @@
+								PEMERINTAH KABUPATEN DENPASAR
+								   RUMAH SAKIT UMUM BALIMED
+						  Jl. Mahendrata No 57 X,  Padangsambian, Kecamatan Barat
+							     Provinsi Bali Telp./fax (0361)484872
+							        Email : rsudbalimed@gmail.com
+					  =======================================================================
+DATA PASIEN KONSULTASI RUMAH SAKIT BALIMED
+Nama pasien    : maman
+No telepon     : 273832
+Alamat pasien  : jalan gunung gede i no 12X
+Pekerjaan      : mahasiswa
+Keluhan pasien : sakit mata dan sakit hati 
+Nama dokter    : dr wiwin
+jam konsultasi : 19
+ID pasien      : 3852
