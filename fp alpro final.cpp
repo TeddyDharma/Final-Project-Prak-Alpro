@@ -26,21 +26,12 @@ typedef struct {
 	char tanggal_masuk[20];
 	int id;  
 }patient_identity;
-int menu_docter(){
-	int choose;
-	printf("1. Lihat jadwal konsultasi dr dharma\n"); 
-	printf("2. Lihat jadwal konsultasi dr wayan\n"); 
-	printf("ketik pilhan anda : ");
-	scanf("%d", &choose); 
-	return choose;
-}
 int menu_perawat(){
 	int input;
 	printf("=====================================================================\n"); 
 	printf("1. Jadwal Kerja\n");
 	printf("2. Total Gaji\n");
-	printf("3. Hapus Data Pasien Rawat Inap\n");
-	printf("4. Tampilkan Data Pasien Rawat Inap\n");
+	printf("3. Tampilkan Data Pasien Rawat Inap\n");
 	printf("=====================================================================\n"); 
 	printf("Ketik pilihan anda : "); 
 	scanf("%d", &input); 
@@ -48,8 +39,8 @@ int menu_perawat(){
 }
 int get_ID(){
 	srand(time(0));
-    int nilai = rand() % 10000;
-    return nilai;
+	int nilai = rand() % 10000;
+	return nilai;
 }
 void formulir_pasien_rawat_inap(){
 	back:
@@ -151,162 +142,20 @@ void formulir_pasien_rawat_inap(){
 	
 }
 
-void read_data_pasien_rawat_inap(){
+void read_data_pasien(){
 	patient_identity idn; 
-	FILE *read = fopen("data_rawat_inap.txt", "r");
+	FILE *read = fopen("riwayat_pasien.txt", "r");
 	char ch = fgetc(read); 
-		printf("\t\t\t\t\t\t\t\tPEMERINTAH KABUPATEN DENPASAR\n"); 
-		printf("\t\t\t\t\t\t\t\t   RUMAH SAKIT UMUM BALIMED\n"); 
-		printf("\t\t\t\t\t\t  Jl. Mahendrata No 57 X,  Padangsambian, Kecamatan Barat\n"); 
-		printf("\t\t\t\t\t\t\t     Provinsi Bali Telp./fax (0361)484872\n"); 
-		printf("\t\t\t\t\t\t\t        Email : rsudbalimed@gmail.com\n"); 
-		printf("\t\t\t\t\t  =======================================================================\n"); 
-	while((ch = fgetc(read)) != EOF){
-		fscanf(read, "%d", &idn.id); 
-		printf("ID Pasien         : %d\n", idn.id);
-		fscanf(read, "%s", &idn.nama_pasien); 
-		printf("Nama Pasien       : %s\n", idn.nama_pasien);  
-		fscanf(read, "%s", &idn.no_telepon); 
-		printf("No Telepon pasien : %s\n", idn.no_telepon); 
-		fscanf(read, "%s", &idn.pekerjaan);
-		printf("Pekerjaan pasien  : %s\n", idn.pekerjaan);
-		fscanf(read, "%s", &idn.keluhan);
-		printf("Keluhan pasien    : %s\n", idn.keluhan); 
-		fscanf(read, "%s", &idn.nama_dokter);
-		printf("Nama dokter       : %s\n", idn.nama_dokter); 
-		fscanf(read, "%s", &idn.tanggal_masuk);
-		printf("Tanggal masuk     : %s\n", idn.tanggal_masuk); 
-		printf("=============================================\n");
-		
+	printf("\t\t\t\t\t\t\t\tPEMERINTAH KABUPATEN DENPASAR\n"); 
+	printf("\t\t\t\t\t\t\t\t   RUMAH SAKIT UMUM BALIMED\n"); 
+	printf("\t\t\t\t\t\t  Jl. Mahendrata No 57 X,  Padangsambian, Kecamatan Barat\n"); 
+	printf("\t\t\t\t\t\t\t     Provinsi Bali Telp./fax (0361)484872\n"); 
+	printf("\t\t\t\t\t\t\t        Email : rsudbalimed@gmail.com\n"); 
+	printf("\t\t\t\t\t  =======================================================================\n");
+	while((ch = fgetc(read)) != EOF){ 
+		printf("%c", ch);
 	}
 	fclose(read); 
-}
-void update_data_pasien_rawat_inap(){// di sisi upadate sudah mulai aman
-	read_data_pasien_rawat_inap(); 
-	patient_identity idn;
-	int found = 0;
-	int ID;  
-	printf("ketik ID pasien yang mau diubah statusnya         : "); 
-	scanf("%d", &ID);  
-	FILE *read = fopen("data_rawat_inap.txt", "r");
-	FILE *tampung = fopen("temporary.txt", "w");
-	while(!feof(read)){
-		fscanf(read, "%d", &idn.id);
-		fscanf(read, "%s", idn.nama_pasien);
-		fscanf(read, "%s", idn.no_telepon); 
-		fscanf(read, "%s", idn.pekerjaan);
-		fscanf(read, "%s", idn.keluhan);
-		fscanf(read, "%s", idn.nama_dokter);
-		fscanf(read, "%s", idn.tanggal_masuk); 
-		if(idn.id == ID){
-			found = 1;
-			printf("=============DATA DITEMUKAN===============\n");  
-			printf("============UBAH DATA PASIEN===========\n");
-			printf("ketik nama pasien         : ");
-			fflush(stdin);
-			scanf("%[^\n]", idn.nama_pasien); 
-			printf("ketik no telepon pasien   : "); 
-			fflush(stdin);
-			scanf("%[^\n]", idn.no_telepon);
-			printf("ketik pekerjaan pasien    :  ");
-			fflush(stdin); 
-			scanf("%[^\n]", idn.pekerjaan);
-			printf("ketik keluhan pasien      :  ");
-			fflush(stdin); 
-			scanf("%[^\n]",idn.nama_dokter ); 
-			printf("ketik tanggal masuk pasien : ");
-			fflush(stdin);
-			scanf("%[^\n]", idn.tanggal_masuk);
-			fprintf(tampung, "%d", idn.id);
-			fprintf(tampung, "%s", idn.nama_pasien);
-			fprintf(tampung, "%s", idn.no_telepon);
-			fprintf(tampung, "%s", idn.pekerjaan);
-			fprintf(tampung, "%s", idn.no_telepon);
-			fprintf(tampung, "%s", idn.keluhan);
-			fprintf(tampung, "%s", idn.nama_dokter);
-			fprintf(tampung, "%s", idn.tanggal_masuk);
-		}else{
-			fprintf(tampung, "%d", idn.id);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.nama_pasien);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.no_telepon);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.pekerjaan);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.no_telepon);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.keluhan);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.nama_dokter);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.tanggal_masuk);
-			fputs("\n", tampung);
-		}
-	}
-		fclose(read); 
-		fclose(tampung); 
-		remove("data_rawat_inap.txt");
-		rename("temporary.txt", "data_rawat_inap.txt"); 
-		if(found == 1){
-			printf("DATA PASIEN DENGAN ID %d DITEMUKAN DAN SUDAH DIPERBAHARUI\n", ID); 
-			read_data_pasien_rawat_inap();
-		}else{
-			printf("DATA DENGAN ID %d TIDAK DITEMUKAN!!\n", ID);
-		}
-	 
-}
-void delete_data_pasien_rawat_inap(){
-	read_data_pasien_rawat_inap();
-	patient_identity idn;
-	int found = 0; 
-	int ID;
-	FILE *read = fopen("data_rawat_inap.txt", "r");
-	FILE *tampung = fopen("temporary.txt", "w"); 
-	printf("ketik ID pasien yang akan dihapus : ");
-	scanf("%d", &ID);
-	fflush(stdin);
-	while(!feof(read)){
-		fscanf(read, "%d", &idn.id);
-		fscanf(read, "%s", idn.nama_pasien);
-		fscanf(read, "%s", idn.no_telepon); 
-		fscanf(read, "%s", idn.pekerjaan);
-		fscanf(read, "%s", idn.keluhan);
-		fscanf(read, "%s", idn.nama_dokter);
-		fscanf(read, "%s", idn.tanggal_masuk); 
-		if(idn.id == ID){
-			found = 1; 
-			continue;
-		}else{
-			fprintf(tampung, "%d", idn.id);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.nama_pasien);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.no_telepon);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.pekerjaan);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.no_telepon);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.keluhan);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.nama_dokter);
-			fputs("\n", tampung);
-			fprintf(tampung, "%s", idn.tanggal_masuk);
-			fputs("\n", tampung);
-		}
-	}
-		fclose(read); 
-		fclose(tampung); 
-		remove("data_rawat_inap.txt");
-		rename("temporary.txt", "data_rawat_inap.txt"); 
-		if(found == 1){
-			printf("DATA PASIEN DENGAN ID %d DITEMUKAN DAN SUDAH DIHAPUS\n", ID); 
-			read_data_pasien_rawat_inap();
-		}else{
-			printf("DATA DENGAN ID %d TIDAK DITEMUKAN!!\n", ID);
-		}
-		
 }
 void formulir_pasien_konsultasi(){
 	back: 
@@ -413,31 +262,6 @@ void formulir_pasien_konsultasi(){
 	}
 	
 }
-void read_data_konsul_dr(int no_docter){
-	char ch;
-	if(no_docter == 1){
-		FILE *file = fopen("jadwal konsultasi dr dharma.txt", "r");
-		while((ch = fgetc(file)) != EOF){
-		printf("%c", ch); 
-	} 
-	}else if(no_docter == 2){
-		FILE *file = fopen("jadwal konsultasi dr wayan", "r");
-		while((ch = fgetc(file)) != EOF){
-		printf("%c", ch); 
-	} 
-	}
-}
-void docter_proces(){
-	int choose = menu_docter(); 
-	switch(choose){
-		case 1:
-		read_data_konsul_dr(1);
-		break; 
-		case 2:
-		read_data_konsul_dr(2); 
-		break;
-	}
-}
 void proses_menu_perawat(int *a){
 	int pilih_menu = *a; 
 	switch(pilih_menu){
@@ -464,11 +288,9 @@ void proses_menu_perawat(int *a){
 		fclose(total_gaji); 
 		break; 
 		case 3: 
-		delete_data_pasien_rawat_inap();
+		read_data_pasien();
 		break;
-		case 4: 
-		read_data_pasien_rawat_inap();
-		break;
+		
 	}
 }
 int main(){
@@ -490,18 +312,14 @@ int main(){
         printf("=====================================================================\n"); 
         printf("                   Menu untuk tenaga kesehatan\n");
         printf("=====================================================================\n"); 
-        printf("1.Dokter\n");
-        printf("2.Perawat\n");
-        printf("3.Penunggu pasien\n");
+        printf("1.Perawat\n");
         printf("Ketik pilihan anda : ");
         scanf("%d", &menu_1); 
-        if(menu_1 == 1){ 
-        	docter_proces(); 
-        }else if(menu_1 == 2){
+       if(menu_1 == 1){
         	char nama_perawat[50];
         	printf("=====================================================================\n"); 
         	printf("Ketik nama perawat : "); 
-			scanf("%s", nama_perawat);  
+			scanf("%[^\n]", nama_perawat);  
 			system("cls");
 			printf("=====================================================================\n");
 			printf("                Selamat datang perawat %s  \n", nama_perawat); 
@@ -518,7 +336,6 @@ int main(){
         printf("=====================================================================\n"); 
         printf("1.Formulir pendaftaran pasien konsultasi \n");
         printf("2.Formulir pendaftaran pasien rawat inap\n"); 
-        printf("3.Data pasien rawat inap\n");
         printf("Ketik pilihan anda : ");
         scanf("%d", &input_pasien);
         switch(input_pasien){
@@ -527,9 +344,6 @@ int main(){
         	break; 
         	case 2: 
         	formulir_pasien_rawat_inap();
-        	break;
-        	case 3: 
-        	read_data_pasien_rawat_inap();
         	break;
         	default: 
         	printf("INPUTAN ANDA SALAH ! SILAHKAN ULANGI\n");
